@@ -5,10 +5,17 @@ module.exports = {
     async find(req, res) {
         const { email } = req.body
 
-        const patient = await Patient.findOne({ where: { email } })
-        const professional = await Professional.findOne({ where: { email } })
+        const patient = await Patient.findOne({ 
+            where: { email },
+            raw: true
+        })
 
-        if(patient || professional)
+        const professional = await Professional.findOne({ 
+            where: { email },
+            raw: true
+        })
+
+        if(patient || professional) 
             return res.json(patient || professional)
         else
             return res.status(404).json({error: 'User not found'})
