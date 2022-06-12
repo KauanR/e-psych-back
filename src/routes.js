@@ -2,6 +2,7 @@ const express = require('express')
 
 const PatientController = require('./controllers/PatientController')
 const ProfessionalController = require('./controllers/ProfessionalController')
+const AttendanceController = require('./controllers/AttendanceController')
 
 const routes = express.Router()
 
@@ -12,5 +13,8 @@ routes.put('/patient/:patient_id', PatientController.update)
 routes.post('/professional', ProfessionalController.create)
 routes.post('/professional/find', ProfessionalController.find)
 routes.put('/professional/:professional_id', ProfessionalController.update)
+
+routes.post('/attendance/', AttendanceController.create)
+routes.post('/attendance/count', AttendanceController.count)
 
 module.exports = routes
