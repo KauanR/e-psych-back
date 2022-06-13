@@ -21,21 +21,25 @@ module.exports = {
                     [`${source_type}_id`]: source_id
                 }
             })
-    
-            const ids = rows.map(el => el.id).join(', ')
-    
-            console.log(ids)
-    
-            const [results] = await connection.query(
-                `SELECT COUNT(id) FROM appointments WHERE attendance_id IN (${ids})`,
-                {
-                    raw: true
-                }
-            )
-    
+
+            let appointmentsCount = 0
+
+            if(rows.length > 0) {
+                const ids = rows.map(el => el.id).join(', ')
+        
+                const [results] = await connection.query(
+                    `SELECT COUNT(id) FROM appointments WHERE attendance_id IN (${ids})`,
+                    {
+                        raw: true
+                    }
+                )
+
+                appointmentsCount = parseInt(results[0].count)
+            }
+
             return res.json({
                 attendances_count: count,
-                appointments_count: parseInt(results[0].count)
+                appointments_count: appointmentsCount
             })
         } catch(err) {
             console.log(err)
