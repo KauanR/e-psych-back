@@ -41,6 +41,21 @@ module.exports = {
         }
     },
 
+    async delete(req, res) {
+        const { patient_id } = req.params
+
+        try {
+            await Patient.destroy({
+                where: { id: patient_id }
+            })
+
+            return res.json({response: 'Patient deleted successfully'})
+        } catch(err) {
+            console.log(err)
+            return res.status(500).json({err})
+        }
+    },
+
     async find(req, res) {
         const { email } = req.body
 

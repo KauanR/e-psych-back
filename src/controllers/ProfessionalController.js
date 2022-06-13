@@ -43,6 +43,21 @@ module.exports = {
         }
     },
 
+    async delete(req, res) {
+        const { professional_id } = req.params
+
+        try {
+            await Professional.destroy({
+                where: { id: professional_id }
+            })
+
+            return res.json({response: 'Professional deleted successfully'})
+        } catch(err) {
+            console.log(err)
+            return res.status(500).json({err})
+        }
+    },
+
     async find(req, res) {
         const { email } = req.body
 
