@@ -6,7 +6,7 @@
     "scripts": {
         "dev": "nodemon src/server.js",
         "migrate": "npx sequelize db:migrate",
-        "create": "npx sequelize migration:create --name="
+        "seed": "npx sequelize db:seed:all"
     },
     "repository": {
         "type": "git",
