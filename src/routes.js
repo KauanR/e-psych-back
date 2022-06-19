@@ -13,6 +13,8 @@ routes.delete('/patient/:patient_id', PatientController.delete)
 
 routes.post('/professional', ProfessionalController.create)
 routes.post('/professional/find', ProfessionalController.find)
+routes.get('/professional', ProfessionalController.readAll)
+routes.get('/professional/:professional_id', ProfessionalController.readOne)
 routes.put('/professional/:professional_id', ProfessionalController.update)
 routes.delete('/professional/:professional_id', ProfessionalController.delete)
 

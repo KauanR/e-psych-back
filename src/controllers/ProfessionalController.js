@@ -1,3 +1,4 @@
+const { fn, col } = require('sequelize')
 const Professional = require('../models/Professional')
 
 module.exports = {
@@ -41,6 +42,47 @@ module.exports = {
             console.log(err)
             return res.status(500).json({err})
         }
+    },
+
+    async readAll(req, res) {
+        const { offset, limit } = req.query
+
+        try {
+            const {count, rows} = await Professional.findAndCountAll({
+                offset: offset || 0,
+                limit: limit || 10,
+                attributes: [
+                    'id',
+                    'name',
+                    'cost_level',
+                    'observations',
+                    [fn('CONCAT_WS', ', ', col('zip_code'), col('address'), col('address_number')), 'full_address']
+                ]
+            })
+            return res.json({
+                count,
+                data: rows
+            })
+        } catch(err) {
+            console.log(err)
+            return res.status(500).json({err})
+        }
+    },
+
+    async readOne(req, res) {
+        const { professional_id } = req.params
+
+        const professional = await Professional.findOne({
+            where: {
+                id: professional_id
+            },
+            raw: true
+        })
+
+        if(!professional)
+            return res.json({})
+    
+        return res.json(professional)
     },
 
     async delete(req, res) {
