@@ -1,24 +1,8 @@
 const express = require('express')
+const router = express.Router()
 
-const PatientController = require('./controllers/PatientController')
-const ProfessionalController = require('./controllers/ProfessionalController')
-const AttendanceController = require('./controllers/AttendanceController')
+router.use('/patient', require('./routes/PatientRoutes'))
+router.use('/professional', require('./routes/ProfessionalRoutes'))
+router.use('/attendance', require('./routes/AttendanceRoutes'))
 
-const routes = express.Router()
-
-routes.post('/patient', PatientController.create)
-routes.post('/patient/find', PatientController.find)
-routes.put('/patient/:patient_id', PatientController.update)
-routes.delete('/patient/:patient_id', PatientController.delete)
-
-routes.post('/professional', ProfessionalController.create)
-routes.post('/professional/find', ProfessionalController.find)
-routes.get('/professional', ProfessionalController.readAll)
-routes.get('/professional/:professional_id', ProfessionalController.readOne)
-routes.put('/professional/:professional_id', ProfessionalController.update)
-routes.delete('/professional/:professional_id', ProfessionalController.delete)
-
-routes.post('/attendance/', AttendanceController.create)
-routes.post('/attendance/count', AttendanceController.count)
-
-module.exports = routes
+module.exports = router
