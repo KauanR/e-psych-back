@@ -1,15 +1,20 @@
 require('dotenv').config()
-const express = require('express')
-const cors = require('cors')
-const routes = require('./routes')
-
 require('./database')
+const cors = require('cors')
+const express = require('express')
 
 const app = express()
 
+// Habilitando o CORS
 app.use(cors())
+// Middleware pra utilizar JSON na aplicação
 app.use(express.json())
-app.use(routes)
 
+// Rotas da aplicação
+app.use('/patients', require('./routes/PatientRoutes'))
+app.use('/professionals', require('./routes/ProfessionalRoutes'))
+app.use('/attendances', require('./routes/AttendanceRoutes'))
+
+// "Abrindo" o servidor
 app.listen(process.env.PORT)
 console.log(`Running on port ${process.env.PORT}`)

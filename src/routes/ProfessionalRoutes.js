@@ -1,13 +1,17 @@
 const express = require('express')
 const router = express.Router()
 
-const ProfessionalController = require('../controllers/ProfessionalController')
+const controller = require('../controllers/ProfessionalController')
 
-router.post('/', ProfessionalController.create)
-router.post('/find', ProfessionalController.find)
-router.get('/', ProfessionalController.readAll)
-router.get('/:professional_id', ProfessionalController.readOne)
-router.put('/:professional_id', ProfessionalController.update)
-router.delete('/:professional_id', ProfessionalController.delete)
+// Create
+router.post('/', controller.create)
+// Read
+router.get('/', controller.readAll)
+router.get('/:professional_id', controller.readOne)
+router.post('/find', controller.find)
+// Update
+router.put('/:professional_id', controller.update)
+// Delete
+router.delete('/:professional_id', controller.delete)
 
 module.exports = router

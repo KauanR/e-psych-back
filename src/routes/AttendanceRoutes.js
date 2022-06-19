@@ -1,9 +1,16 @@
 const express = require('express')
 const router = express.Router()
 
-const AttendanceController = require('../controllers/AttendanceController')
+const controller = require('../controllers/AttendanceController')
 
-router.post('/', AttendanceController.create)
-router.post('/count', AttendanceController.count)
+// Create
+router.post('/', controller.create)
+// Read
+router.post('/count', controller.count)
+// Update
+// router.put(/:attendance_id, controller.update)
+// Delete
+// router.delete('/:attendance_id', controller.delete)
+
 
 module.exports = router

@@ -1,11 +1,15 @@
 const express = require('express')
 const router = express.Router()
 
-const PatientController = require('../controllers/PatientController')
+const controller = require('../controllers/PatientController')
 
-router.post('/', PatientController.create)
-router.post('/find', PatientController.find)
-router.put('/:patient_id', PatientController.update)
-router.delete('/:patient_id', PatientController.delete)
+// Create
+router.post('/', controller.create)
+// Read
+router.post('/find', controller.find)
+// Update
+router.put('/:patient_id', controller.update)
+// Delete
+router.delete('/:patient_id', controller.delete)
 
 module.exports = router
