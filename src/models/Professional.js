@@ -16,6 +16,10 @@ class Professional extends Model {
                 type: DataTypes.STRING,
                 allowNull: true
             },
+            photo_url: {
+                type: DataTypes.STRING,
+                allowNull: true
+            },
             register_number: {
                 type: DataTypes.STRING,
                 allowNull: false

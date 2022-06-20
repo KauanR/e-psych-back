@@ -12,6 +12,7 @@ module.exports = {
         const { professional_id } = req.params
 
         const {
+            photo_url,
             phone_number,
             address,
             address_number,
@@ -24,6 +25,7 @@ module.exports = {
         try {
             const professional = await Professional.update(
                 {
+                    photo_url,
                     phone_number,
                     address,
                     address_number,
@@ -54,6 +56,9 @@ module.exports = {
                 attributes: [
                     'id',
                     'name',
+                    'email',
+                    'photo_url',
+                    'register_number',
                     'cost_level',
                     'observations',
                     [fn('CONCAT_WS', ', ', col('zip_code'), col('address'), col('address_number')), 'full_address']

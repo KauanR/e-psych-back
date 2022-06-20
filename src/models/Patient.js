@@ -16,6 +16,10 @@ class Patient extends Model {
                 type: DataTypes.STRING,
                 allowNull: true
             },
+            photo_url: {
+                type: DataTypes.STRING,
+                allowNull: true
+            },
             zip_code: {
                 type: DataTypes.STRING,
                 allowNull: false

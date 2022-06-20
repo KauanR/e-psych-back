@@ -22,6 +22,10 @@ module.exports = {
                 type: Sequelize.STRING,
                 allowNull: true
             },
+            photo_url: {
+                type: Sequelize.STRING,
+                allowNull: true
+            },
             zip_code: {
                 type: Sequelize.STRING,
                 allowNull: false,

@@ -15,6 +15,7 @@ module.exports = {
         const { patient_id } = req.params
 
         const {
+            photo_url,
             phone_number,
             address,
             address_number,
@@ -24,6 +25,7 @@ module.exports = {
         try {
             const patient = await Patient.update(
                 {
+                    photo_url,
                     phone_number,
                     address,
                     address_number,
