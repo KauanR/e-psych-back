@@ -4,8 +4,24 @@ const connection = require('../database')
 module.exports = {
     async create(req, res) {
         try {
-            const attendance = await Attendance.create(req.body)
-            return res.json(attendance)
+            const {professional_id, patient_id} = req.body
+
+            const [attendance, created] = await Attendance.findOrCreate({
+                where: {
+                    professional_id,
+                    patient_id
+                },
+                defaults: {
+                    professional_id,
+                    patient_id,
+                    status: 'pending'
+                }
+            })
+
+            if(created)
+                return res.json(attendance)
+            else
+                return res.json({message: 'This attendance is already registered'})
         } catch(err) {
             console.log(err)
             return res.status(500).json({err})
