@@ -1,4 +1,5 @@
 const { fn, col } = require('sequelize')
+const Attendance = require('../models/Attendance')
 const Professional = require('../models/Professional')
 
 module.exports = {
@@ -77,12 +78,20 @@ module.exports = {
     async readOne(req, res) {
         const { professional_id } = req.params
 
-        const professional = await Professional.findOne({
-            where: {
-                id: professional_id
-            },
-            raw: true
-        })
+        const professional = await Professional.findByPk(
+            professional_id,
+            {
+                include: {
+                    association: 'attendances',
+                    attributes: ['status']
+                }
+            }
+        )
+
+        const activeAttendances = professional.attendances.filter(el => el.status === 'active')
+        const allAttendances = professional.attendances.filter(el => el.status !== 'rejected' && el.status !== 'pending')
+        professional.setDataValue('attendancesCount', activeAttendances.length)
+        professional.setDataValue('allAttendancesCount', allAttendances.length)
 
         if(!professional)
             return res.json({})
