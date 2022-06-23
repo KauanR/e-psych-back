@@ -1,5 +1,4 @@
 const { fn, col } = require('sequelize')
-const Attendance = require('../models/Attendance')
 const Professional = require('../models/Professional')
 
 module.exports = {
