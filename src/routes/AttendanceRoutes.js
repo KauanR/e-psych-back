@@ -6,6 +6,7 @@ const controller = require('../controllers/AttendanceController')
 // Create
 router.post('/', controller.create)
 // Read
+router.get('/', controller.readAll)
 router.post('/count', controller.count)
 // Update
 // router.put(/:attendance_id, controller.update)

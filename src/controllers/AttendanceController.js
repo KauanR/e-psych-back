@@ -28,6 +28,27 @@ module.exports = {
         }
     },
 
+    async readAll(req, res) {
+        const status = req.query.status?.split(',') || ['pending', 'active']
+
+        try {
+            const attendances = await Attendance.findAll({
+                where: { status },
+                attributes: {
+                    exclude: ['patient_id', 'professional_id']
+                },
+                include: [
+                    { association: 'professional' },
+                    { association: 'patient' }
+                ]
+            })
+            return res.json(attendances)
+        } catch(err) {
+            console.log(err)
+            return res.status(500).json({err})
+        }
+    },
+
     async count(req, res) {
         try {
             const { source_id, source_type } = req.body
