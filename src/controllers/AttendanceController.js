@@ -29,11 +29,16 @@ module.exports = {
     },
 
     async readAll(req, res) {
+        const { patient_id, professional_id } = req.query
         const status = req.query.status?.split(',') || ['pending', 'active']
 
         try {
             const attendances = await Attendance.findAll({
-                where: { status },
+                where: { 
+                    status,
+                    ...(patient_id && {patient_id}),
+                    ...(professional_id && {professional_id}),
+                },
                 attributes: {
                     exclude: ['patient_id', 'professional_id']
                 },
