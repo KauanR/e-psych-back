@@ -54,6 +54,30 @@ module.exports = {
         }
     },
 
+    async readOne(req, res) {
+        const { attendance_id } = req.params
+        const { add } = req.query
+
+        const attendance = await Attendance.findByPk(
+            attendance_id,
+            {
+                attributes: {
+                    exclude: ['patient_id', 'professional_id']
+                },
+                include: [
+                    { association: add },
+                    { association: 'appointments' },
+                    { association: 'reports' }
+                ]
+            }
+        )
+
+        if(!attendance)
+            return res.status(400).json({error: 'Attendance not found'})
+
+        return res.json(attendance)
+    },
+
     async count(req, res) {
         try {
             const { source_id, source_type } = req.body
