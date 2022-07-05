@@ -15,7 +15,12 @@ module.exports = {
         const { attendance_id } = req.params
 
         try {
-            const appointments = await Appointment.findAll({ where: { attendance_id } })
+            const appointments = await Appointment.findAll({ 
+                where: { attendance_id },
+                attributes: {
+                    exclude: ['attendance_id']
+                }
+            })
 
             return res.json(appointments)
         } catch(err) {
