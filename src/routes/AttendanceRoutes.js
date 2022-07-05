@@ -10,7 +10,7 @@ router.get('/', controller.readAll)
 router.get('/:attendance_id', controller.readOne)
 router.post('/count', controller.count)
 // Update
-// router.put(/:attendance_id, controller.update)
+router.put('/:attendance_id', controller.update)
 // Delete
 // router.delete('/:attendance_id', controller.delete)
 

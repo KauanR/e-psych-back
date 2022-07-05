@@ -28,6 +28,23 @@ module.exports = {
         }
     },
 
+    async update(req, res) {
+        const { attendance_id } = req.params
+        const { status } = req.body
+
+        try {
+            const attendance = await Attendance.update(
+                { status },
+                { where: { id: attendance_id } }
+            )
+
+            return res.json(attendance)
+        } catch(err) {
+            console.log(err)
+            return res.status(500).json({err})
+        }
+    },
+
     async readAll(req, res) {
         const { patient_id, professional_id } = req.query
         const status = req.query.status?.split(',') || ['pending', 'active']
@@ -65,9 +82,7 @@ module.exports = {
                     exclude: ['patient_id', 'professional_id']
                 },
                 include: [
-                    { association: add },
-                    { association: 'appointments' },
-                    { association: 'reports' }
+                    { association: add }
                 ]
             }
         )
