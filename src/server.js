@@ -14,6 +14,7 @@ app.use(express.json())
 app.use('/patients', require('./routes/PatientRoutes'))
 app.use('/professionals', require('./routes/ProfessionalRoutes'))
 app.use('/attendances', require('./routes/AttendanceRoutes'))
+app.use('/appointments', require('./routes/AppointmentRoutes'))
 
 // "Abrindo" o servidor
 app.listen(process.env.PORT)
